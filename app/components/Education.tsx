@@ -36,7 +36,7 @@ export default function Education() {
   const cardAnimation = useAnimateOnScroll();
 
   return (
-    <section id="education" className="bg-slate-900 py-24 overflow-hidden px-28">
+    <section id="education" className="bg-slate-900 py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         
         {/* Header Section */}

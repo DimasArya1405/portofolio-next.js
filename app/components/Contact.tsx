@@ -36,7 +36,7 @@ export default function Contact() {
   const rightCol = useAnimateOnScroll();
 
   return (
-    <section id="contact" className="bg-slate-950 py-24 overflow-hidden px-28">
+    <section id="contact" className="bg-slate-950 py-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
           

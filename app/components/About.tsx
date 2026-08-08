@@ -35,7 +35,7 @@ export default function About() {
   const rightCol = useAnimateOnScroll();
 
   return (
-    <section id="about" className="bg-slate-900 py-24 overflow-hidden px-28 md:px-12 sm:px-6">
+    <section id="about" className="bg-slate-900 py-24 overflow-hidden md:px-12 sm:px-6">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           

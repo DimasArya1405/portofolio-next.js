@@ -20,7 +20,7 @@ export default function Hero() {
           {/* Nama Utama - Muncul dengan Delay Sedikit */}
           <h1 
             style={{ animationDelay: "0.2s" }}
-            className="animate__animated animate__fadeInUp text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-8xl"
+            className="animate__animated animate__fadeInUp text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-6xl"
           >
             Dimas Arya Nugraha
           </h1>

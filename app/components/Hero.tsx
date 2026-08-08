@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden bg-slate-950"
+      className="relative flex min-h-screen items-center overflow-hidden bg-slate-950 px-36"
     >
       {/* Background Glow dengan Efek Smooth Fade In */}
       <div className="animate__animated animate__fadeIn animate__slower absolute -left-40 top-20 h-80 w-80 rounded-full bg-cyan-500/20 blur-[120px]" />

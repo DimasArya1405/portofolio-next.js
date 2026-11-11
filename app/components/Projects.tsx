@@ -11,8 +11,7 @@ const projects = [
       "SI-AMI PNC is a web-based application that I developed to streamline and support the Internal Quality Audit (AMI) business processes at Politeknik Negeri Cilacap.",
     technologies: ["Laravel", "PHP", "MySQL", "Tailwind CSS"],
     image: "/img/projects/siami.png", // Tambahkan path gambar di sini
-    github: "https://github.com/DimasArya1405/SI-AMI-PNC",
-    demo: "probowdwi.my.id",
+    github: "https://github.com/DimasArya1405/SI-AMI-PNC"
   },
   {
     title: "REDEVELOPMENT SIKOTAMA",
@@ -20,8 +19,7 @@ const projects = [
       "SIKOTAMA is a web-based system designed to manage and streamline administrative processes for final-year students at Universitas Islam Indonesia Yogyakarta.",
     technologies: ["Laravel","MySQL", "JavaScript", "Bootstrap"],
     image: "/img/projects/sikotama.png",
-    github: "https://github.com/budi1104/sikotama",
-    demo: "#",
+    github: "https://github.com/budi1104/sikotama"
   },
   {
     title: "SIMPEG PCNU",
@@ -29,8 +27,7 @@ const projects = [
       "SIMPEG-PCNU is a web-based personnel management system developed to manage employee records and streamline the issuance of official decision letters at PCNU Cilacap.",
     technologies: ["Laravel", "MySQL","React","Tailwind CSS"],
     image: "/img/projects/pcnu.png",
-    github: "https://github.com/Arya0D/simpeg-pcnu-frontend",
-    demo: "#",
+    github: "https://github.com/Arya0D/simpeg-pcnu-frontend"
   },
   {
     title: "KUBE",
@@ -38,8 +35,7 @@ const projects = [
       "KUBE is a web-based system that I developed to streamline and manage the workflow of the Joint Business Group (KUBE) program at the Social Services Office.",
     technologies: ["Laravel", "Tailwind CSS", "Bootsrap", "MySQL"],
     image: "/img/projects/kube.png",
-    github: "https://github.com/DimasArya1405/kube",
-    demo: "#",
+    github: "https://github.com/DimasArya1405/kube"
   },
   {
     title: "WEDDING INVITATION",
@@ -47,8 +43,7 @@ const projects = [
       "Wedding Invitation is a web-based platform that enables couples to create and share personalized digital wedding invitations with ease.",
     technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
     image: "/img/projects/wedding.png",
-    github: "https://github.com/DimasArya1405/Wedding-Invitation",
-    demo: "#",
+    github: "https://github.com/DimasArya1405/Wedding-Invitation"
   },
   {
     title: "SIPTERA",
@@ -56,8 +51,7 @@ const projects = [
       "SIPTERA is a web-based information system developed to simplify the management and administration of population data.",
     technologies: ["C","MySQL", "C#"],
     image: "/img/projects/siptera.png",
-    github: "https://github.com/DimasArya1405/sistem-kependudukan-tes-magang-",
-    demo: "#",
+    github: "https://github.com/DimasArya1405/sistem-kependudukan-tes-magang-"
   },
 ];
 
@@ -179,6 +173,7 @@ export default function Projects() {
 
               <div className="mt-6 flex gap-4 border-t border-slate-800 pt-5">
                 <a
+                  target="_blank"
                   href={project.github}
                   className="flex items-center gap-2 text-sm text-slate-400 transition hover:text-white"
                 >
@@ -186,13 +181,6 @@ export default function Projects() {
                   GitHub
                 </a>
 
-                <a
-                  href={project.demo}
-                  className="flex items-center gap-2 text-sm text-slate-400 transition hover:text-cyan-400"
-                >
-                  Live Demo
-                  <ArrowUpRight size={17} />
-                </a>
               </div>
             </article>
           ))}

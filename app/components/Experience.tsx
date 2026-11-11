@@ -1,21 +1,15 @@
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 
 const experiences = [
   {
-    year: "2025 — Present",
-    role: "Full Stack Web Developer",
-    company: "Personal & Academic Projects",
+    year: "2025",
+    role: "Full Stack Web Developer (Internship)",
+    company: "Tanjung Mulia Informatika",
     description:
-      "Developing web applications using modern frontend and backend technologies, including system architecture, database design, authentication, CRUD functionality, and deployment.",
-  },
-  {
-    year: "2024 — 2025",
-    role: "Web Developer",
-    company: "Project Experience",
-    description:
-      "Built and maintained web-based applications with focus on responsive UI, backend functionality, database management, and system integration.",
+      "Developed SIKOTAMA, a full-stack web application using Laravel, JavaScript, and Bootstrap, serving over 5,000 campus users. Configured and deployed web applications to hosting and VM servers, including domain pointing and production setup. Developed backend authentication and MySQL database integration using native PHP for internal web applications.",
   },
 ];
 
@@ -54,7 +48,7 @@ export default function Experience() {
   return (
     <section id="experience" className="bg-slate-950 py-24 overflow-hidden">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
-        
+
         {/* Header Section */}
         <div
           ref={headerAnimation.ref}

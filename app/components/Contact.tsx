@@ -1,14 +1,20 @@
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { Mail, MapPin, Send } from "lucide-react";
 
+// Animation on scroll
 function useAnimateOnScroll() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -16,14 +22,12 @@ function useAnimateOnScroll() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0.15 }
     );
 
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(element);
 
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return { ref, isVisible };
@@ -33,33 +37,46 @@ export default function Contact() {
   const leftCol = useAnimateOnScroll();
   const rightCol = useAnimateOnScroll();
 
-  const formRef = useRef(null);
+  // Form reference
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const [isSending, setIsSending] = useState(false);
-  const [notif, setNotif] = useState({
+
+  const [notif, setNotif] = useState<{
+    type: "success" | "error" | "";
+    message: string;
+  }>({
     type: "",
     message: "",
   });
 
-  const handleSubmit = async (event) => {
+  // Submit contact form
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!formRef.current) return;
+    const form = formRef.current;
+    if (!form) return;
 
     setIsSending(true);
     setNotif({ type: "", message: "" });
 
     try {
-      await emailjs.sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, formRef.current, {
-        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-      });
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        form,
+        {
+          publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+        }
+      );
 
       setNotif({
         type: "success",
         message: "Message sent successfully! Thank you for reaching out.",
       });
 
-      formRef.current.reset();
+      // Reset form after successful submission
+      form.reset();
     } catch (error) {
       console.error("EmailJS Error:", error);
 
@@ -73,16 +90,35 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-slate-950 py-24 overflow-hidden">
+    <section
+      id="contact"
+      className="bg-slate-950 py-24 overflow-hidden"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
+
           {/* Left Column */}
-          <div ref={leftCol.ref} className={`transition-opacity duration-300 ${leftCol.isVisible ? "animate__animated animate__fadeInLeft opacity-100" : "opacity-0"}`}>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">Contact</p>
+          <div
+            ref={leftCol.ref}
+            className={`transition-opacity duration-300 ${
+              leftCol.isVisible
+                ? "animate__animated animate__fadeInLeft opacity-100"
+                : "opacity-0"
+            }`}
+          >
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+              Contact
+            </p>
 
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">Let's build something great together.</h2>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              Let's build something great together.
+            </h2>
 
-            <p className="mt-6 max-w-lg leading-8 text-slate-400">Have a project, collaboration, or opportunity in mind? Feel free to reach out. I'm always open to discussing new ideas.</p>
+            <p className="mt-6 max-w-lg leading-8 text-slate-400">
+              Have a project, collaboration, or opportunity in mind?
+              Feel free to reach out. I'm always open to discussing
+              new ideas.
+            </p>
 
             <div className="mt-8 space-y-5">
               <div className="flex items-center gap-4">
@@ -92,7 +128,9 @@ export default function Contact() {
 
                 <div>
                   <p className="text-xs text-slate-500">Email</p>
-                  <p className="text-sm text-slate-300">dimasaryad55@gmail.com</p>
+                  <p className="text-sm text-slate-300">
+                    dimasaryad55@gmail.com
+                  </p>
                 </div>
               </div>
 
@@ -103,18 +141,33 @@ export default function Contact() {
 
                 <div>
                   <p className="text-xs text-slate-500">Location</p>
-                  <p className="text-sm text-slate-300">Cilacap, Central Java, Indonesia</p>
+                  <p className="text-sm text-slate-300">
+                    Cilacap, Central Java, Indonesia
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right Column */}
-          <div ref={rightCol.ref} className={`transition-opacity duration-300 ${rightCol.isVisible ? "animate__animated animate__fadeInRight opacity-100" : "opacity-0"}`}>
-            <form ref={formRef} onSubmit={handleSubmit} className="rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
+          <div
+            ref={rightCol.ref}
+            className={`transition-opacity duration-300 ${
+              rightCol.isVisible
+                ? "animate__animated animate__fadeInRight opacity-100"
+                : "opacity-0"
+            }`}
+          >
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8"
+            >
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-sm text-slate-300">Name</label>
+                  <label className="mb-2 block text-sm text-slate-300">
+                    Name
+                  </label>
 
                   <input
                     type="text"
@@ -126,7 +179,9 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm text-slate-300">Email</label>
+                  <label className="mb-2 block text-sm text-slate-300">
+                    Email
+                  </label>
 
                   <input
                     type="email"
@@ -139,7 +194,9 @@ export default function Contact() {
               </div>
 
               <div className="mt-5">
-                <label className="mb-2 block text-sm text-slate-300">Message</label>
+                <label className="mb-2 block text-sm text-slate-300">
+                  Message
+                </label>
 
                 <textarea
                   name="message"
@@ -152,9 +209,18 @@ export default function Contact() {
 
               {/* Notification */}
               {notif.message && (
-                <div className={`mt-5 rounded-lg px-4 py-3 text-sm ${notif.type === "success" ? "bg-green-500/10 text-green-400 border border-green-500/20" : "bg-red-500/10 text-red-400 border border-red-500/20"}`}>{notif.message}</div>
+                <div
+                  className={`mt-5 rounded-lg border px-4 py-3 text-sm ${
+                    notif.type === "success"
+                      ? "border-green-500/20 bg-green-500/10 text-green-400"
+                      : "border-red-500/20 bg-red-500/10 text-red-400"
+                  }`}
+                >
+                  {notif.message}
+                </div>
               )}
 
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSending}
@@ -165,6 +231,7 @@ export default function Contact() {
               </button>
             </form>
           </div>
+
         </div>
       </div>
     </section>
